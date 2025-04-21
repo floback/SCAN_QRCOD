@@ -26,3 +26,5 @@ export class UserEntity {
   logins: LoginEntity[];
   qrcodes: any;
 }
+export { UserType };
+
