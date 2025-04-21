@@ -1,0 +1,2 @@
+### Gerar QR Code
+GET http://localhost:3000/qrcode/qr-local-test-001

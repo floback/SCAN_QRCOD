@@ -1,0 +1,31 @@
+### CREATE USER
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "email": "filipe_loback@exemplo.com",
+  "name": "João da Silva",
+  "password": "senha123",
+  "status": true
+}
+
+### FIND BY ID
+GET http://localhost:3000/user/a895aab1-206f-4def-9fc2-145b02957484
+
+
+### FIND ALL USER
+GET  http://localhost:3000/user
+
+### UPDATE USER
+PATCH http://localhost:3000/user/3334c0d4-d8ff-46eb-a879-16e6bc3acd46
+Content-Type: application/json
+
+{
+    "name": "filipe Loback",
+    "email": "filipe_loback@exemplo.com",
+    "password": "123123",
+    "status": false
+}
+
+### DELETE USER
+DELETE http://localhost:3000/user/29c91523-35d3-49bc-8eb7-7776f13d4642
