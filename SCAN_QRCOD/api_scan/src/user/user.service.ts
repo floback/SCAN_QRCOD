@@ -6,6 +6,7 @@ import { UserEntity } from './entities/user.entity'
 import { throwError } from 'rxjs';
 import { LoginEntity } from 'src/login/entities/login.entity';
 import * as bcrypt from 'bcrypt';
+import { IsEmail } from 'class-validator';
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,14 @@ export class UserService {
     
   // CREATE USER  
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+    const existingUser = await this.userRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+    
+    if (existingUser) {
+      throw new BadRequestException('Este e-mail já está cadastrado');
+    }
+    
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     const newUser = this.userRepository.create({
       ...createUserDto,
