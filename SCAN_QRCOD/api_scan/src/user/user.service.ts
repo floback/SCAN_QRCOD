@@ -1,5 +1,5 @@
 import { All, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserType } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entities/user.entity'
@@ -124,4 +124,41 @@ async update(id: string, createUserDto: CreateUserDto): Promise<UserEntity> {
   return updatedUser;
 }
 
+async createOwnerIfNotExists(): Promise<void> {
+  const ownerExists = await this.loginRepository.findOne({
+    where: { email: process.env.OWNER_EMAIL },
+    relations: ['user'],
+  });
+
+  if (ownerExists && ownerExists.user.type_user === UserType.owner) {
+    console.log('Owner já existe');
+    return;
+  }
+
+  if (!ownerExists) {
+    const hashedPassword = await bcrypt.hash('senha_supersecreta', 10);
+    
+    const user = this.userRepository.create({
+      name: 'Super Owner',
+      email: process.env.OWNER_EMAIL,
+      password: hashedPassword,
+      type_user: UserType.owner, // <- define tipo de usuário aqui
+    });
+
+    const savedUser = await this.userRepository.save(user);
+
+    const login = this.loginRepository.create({
+      email: process.env.OWNER_EMAIL,
+      password: hashedPassword,
+      user: savedUser, // <- aqui passa o usuário salvo corretamente
+    });
+
+    await this.loginRepository.save(login);
+
+    console.log('🚨 Usuário OWNER criado com sucesso');
+  }
 }
+
+}
+
+

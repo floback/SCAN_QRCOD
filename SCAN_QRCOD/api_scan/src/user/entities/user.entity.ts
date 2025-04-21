@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { LoginEntity } from '../../login/entities/login.entity';
+import { UserType } from '../dto/create-user.dto';
 
 @Entity('users')
 export class UserEntity {
@@ -14,6 +15,9 @@ export class UserEntity {
 
   @Column()
   password: string;
+
+  @Column({ type: 'enum', enum: UserType, default: UserType.user })
+  type_user: UserType;
 
   @Column({ default: true })
   status: boolean;

@@ -29,6 +29,12 @@ export class CreateUsersTable1713300000000 implements MigrationInterface {
             length: '255',
         },
         {
+        name: 'type_user',
+        type: 'enum',
+        enum: ['owner', 'admin', 'user'],
+        default: `'user'`,
+        },
+        {
           name: 'status',
             type: 'boolean',
             default: true,

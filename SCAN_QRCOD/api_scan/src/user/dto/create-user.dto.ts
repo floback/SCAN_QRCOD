@@ -1,5 +1,11 @@
-import { IsEmail, IsNotEmpty, IsString, IsBoolean, IsOptional } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, IsBoolean, IsOptional, IsEnum } from 'class-validator';
 
+ export enum  UserType  {
+  owner = 'OWNER',
+  admin = 'ADMIN',
+  user = 'USER',
+  viwer = 'VIWER'
+}
 export class CreateUserDto {
 
   @IsString()
@@ -15,6 +21,11 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @IsEnum(UserType)
+  @IsOptional()
+  type_user?: UserType;
+
 
   @IsOptional()
   @IsBoolean()
