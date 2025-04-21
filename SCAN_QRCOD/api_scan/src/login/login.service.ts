@@ -1,22 +1,49 @@
-import { Injectable } from '@nestjs/common';
-import { CreateLoginDto } from './dto/create-login.dto';
+// src/login/login.service.ts
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { LoginEntity } from './entities/login.entity';
 
 @Injectable()
 export class LoginService {
-  create(createLoginDto: CreateLoginDto) {
-    return 'This action adds a new login';
-  }
+  constructor(
+    @InjectRepository(LoginEntity)
+    private readonly loginRepository: Repository<LoginEntity>,
+    private readonly jwtService: JwtService
+  ) {}
 
-  findAll() {
-    return `This action returns all login`;
-  }
+  async validateUser(email: string, password: string) {
+    const user = await this.loginRepository.findOne({
+      where: { email },
+      relations: ['user'],
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} login`;
-  }
+    if (!user) {
+      throw new UnauthorizedException('Email ou senha inválidos');
+    }
 
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Email ou senha inválidos');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} login`;
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      id_user: user.user.id,
+    };
+
+    const token = await this.jwtService.signAsync(payload);
+
+    return {
+      access_token: token,
+      user: {
+        id: user.user.id,
+        name: user.user.name,
+        email: user.email,
+      },
+    };
   }
 }

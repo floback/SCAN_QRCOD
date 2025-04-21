@@ -6,6 +6,7 @@ import { ScanModule } from './scan/scan.module';
 import { UserModule } from './user/user.module';
 import { QRCodeModule } from './qrcode/qrcode.module';
 import { LoginModule } from './login/login.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { LoginModule } from './login/login.module';
     UserModule,
     QRCodeModule,
     LoginModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
