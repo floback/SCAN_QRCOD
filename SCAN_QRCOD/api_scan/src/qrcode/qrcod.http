@@ -1,6 +1,6 @@
 POST http://localhost:3000/qrcode
 Content-Type: application/json
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUyMTQ1OSwiZXhwIjoxNzQ1NjA3ODU5fQ.OHPVgdcyf5DxR2dMZQNThqAb6PsIDvt-ZMVLqTNXslw
 {
   "code": "whatsapp-+5521971211060",
   "description": "Link para conversa com suporte",
