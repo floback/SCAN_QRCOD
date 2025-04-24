@@ -19,10 +19,6 @@ export class CreateScanLogsTable1713300000003 implements MigrationInterface {
           isNullable: true,
         },
         {
-          name: 'qrId',
-          type: 'varchar',
-        },
-        {
           name: 'ip',
           type: 'varchar',
         },
@@ -47,10 +43,31 @@ export class CreateScanLogsTable1713300000003 implements MigrationInterface {
           type: 'float',
         },
         {
+          name: 'accuracy',
+          type: 'float',
+          isNullable: true,
+        },
+        {
+          name: 'altitude',
+          type: 'float',
+          isNullable: true,
+        },
+        {
+          name: 'heading',
+          type: 'float',
+          isNullable: true,
+        },
+        {
+          name: 'speed',
+          type: 'float',
+          isNullable: true,
+        },
+        {
           name: 'creation_date',
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',
         },
+        
       ],
     }));
 

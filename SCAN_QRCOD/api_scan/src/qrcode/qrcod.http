@@ -1,2 +1,8 @@
-### Gerar QR Code
-GET http://localhost:3000/qrcode/qr-local-test-001
+POST http://localhost:3000/qrcode
+Content-Type: application/json
+
+{
+  "code": "whatsapp-+5521971211060",
+  "description": "Link para conversa com suporte",
+  "id_user": "uuid-do-usuario"
+}

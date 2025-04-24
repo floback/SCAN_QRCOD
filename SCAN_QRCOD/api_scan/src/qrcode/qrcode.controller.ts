@@ -1,17 +1,16 @@
 // src/qrcode/qrcode.controller.ts
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { QrcodeService } from './qrcode.service';
+import { CreateQrcodeDto } from './dto/create-qrcode.dto';
+import { JwtAuthGuard } from 'src/auth/guard/jtw-auth-guard';
 
 @Controller('qrcode')
 export class QrcodeController {
   constructor(private readonly qrcodeService: QrcodeService) {}
 
-  @Get(':qrId')
-  async getQRCode(@Param('qrId') qrId: string) {
-    const data = await this.qrcodeService.generate(qrId);
-    return {
-      message: 'QR Code gerado com sucesso',
-      ...data,
-    };
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  async generateAndSave(@Body() dto: CreateQrcodeDto) {
+    return await this.qrcodeService.generate(dto);
   }
 }

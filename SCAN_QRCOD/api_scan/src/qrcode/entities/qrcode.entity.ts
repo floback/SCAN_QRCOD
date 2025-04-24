@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+// src/qrcode/entities/qrcode.entity.ts
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+} from 'typeorm';
 import { UserEntity } from '../../user/entities/user.entity';
 
 @Entity('qrcode')
@@ -11,12 +19,17 @@ export class QrcodeEntity {
   user: UserEntity;
 
   @Column()
-  nome: string;
+  code: string; // código gerado para montar o link do QR
 
   @Column({ nullable: true })
-  legenda: string;
+  description: string;
 
   @Column({ default: true })
   status: boolean;
-  scan: any;
+
+  @Column({ type: 'text' })
+  img: string; // salvando a imagem base64 do QR Code
+
+  @CreateDateColumn({ name: 'creation_date' })
+  creationDate: Date;
 }

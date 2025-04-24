@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { LoginEntity } from '../login/entities/login.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -35,16 +34,16 @@ export class AuthService {
       sub: login.id,
       id_user: login.user.id,
       email: login.email,
-      type_user: login.type_user,
+      type_user: login.user.type_user, // Corrigido aqui
     };
 
-    
     return {
       access_token: this.jwtService.sign(payload),
       user: {
         id: login.user.id,
         email: login.email,
         name: login.user.name,
+        type_user: login.user.type_user, // Corrigido aqui
       },
     };
   }

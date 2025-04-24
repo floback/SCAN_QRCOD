@@ -1,22 +1,47 @@
 // src/qrcode/qrcode.service.ts
 import { Injectable } from '@nestjs/common';
 import * as QRCode from 'qrcode';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { QrcodeEntity } from './entities/qrcode.entity';
+import { CreateQrcodeDto } from './dto/create-qrcode.dto';
+import { UserEntity } from '../user/entities/user.entity';
 
 @Injectable()
 export class QrcodeService {
-  async generate(qrId: string): Promise<{ qrId: string; image: string; url: string }> {
-    const baseUrl = process.env.QR_BASE_URL?.trim() || 'https://1638-132-255-43-198.ngrok-free.app';
-    const url = `${baseUrl}/scan/${qrId}`;
+  constructor(
+    @InjectRepository(QrcodeEntity)
+    private readonly qrcodeRepository: Repository<QrcodeEntity>,
+  ) {}
+
+  async generate(dto: CreateQrcodeDto) {
+    const baseUrl = process.env.QR_BASE_URL?.trim();
+    const url = `${baseUrl}/scan/${dto.code}`;
 
     const image = await QRCode.toDataURL(url, {
       width: 300,
       margin: 2,
     });
 
+    const newQr = this.qrcodeRepository.create({
+      code: dto.code,
+      description: dto.description,
+      user: { id: dto.id_user } as UserEntity,
+      img: image, // ✅ Nome correto do campo na entidade
+    });
+    
+
+    const saved = await this.qrcodeRepository.save(newQr);
+
+    console.log('✅ QR Code salvo:', saved);
+
     return {
-      qrId,
-      image,
-      url,
+      message: 'QR Code gerado e salvo com sucesso',
+      id: saved.id,
+      id_user: saved.user?.id,
+      code: saved.code,
+      creationDate: saved.creationDate,
+      image: saved.img,
     };
   }
 }

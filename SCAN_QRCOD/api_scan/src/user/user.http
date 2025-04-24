@@ -10,19 +10,19 @@ Content-Type: application/json
 }
 
 ### FIND BY ID
-GET http://localhost:3000/user/a895aab1-206f-4def-9fc2-145b02957484
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MzdjMTA1NS05YzJkLTQ2YjEtOWQ5MC1mOWJlNjViYjcwNDMiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIyNTY3ODQwOC02M2JiLTQzMTItYmYxOS02NDE4Y2EwMDM5NmQiLCJpYXQiOjE3NDUyMTM0NDMsImV4cCI6MTc0NTI5OTg0M30.o94dUND3hMkTqVkI-tR9zCm0KnlGg36t_HIDQLY0b8s
+GET http://localhost:3000/user/aa1fac24-6f51-4e36-a2d0-b08de6bb12cf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMDJkY2MzNi0yOTM5LTQ5MDYtOWU1Mi1iNzY4MmI3NWI4ZWIiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiI2NDc3NTU1NS03ZWU1LTRiMmQtYjFlNS04MTZlZjQ1ZDU1MmEiLCJ0eXBlIjoidXNlciIsImlhdCI6MTc0NTUwNzM5MCwiZXhwIjoxNzQ1NTkzNzkwfQ.CcAEDlxfWa0srAVzxIXoLg21sBxsalKhG8rlgqIKwxM
 
 
 ### FIND ALL USER
 GET  http://localhost:3000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MzdjMTA1NS05YzJkLTQ2YjEtOWQ5MC1mOWJlNjViYjcwNDMiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIyNTY3ODQwOC02M2JiLTQzMTItYmYxOS02NDE4Y2EwMDM5NmQiLCJpYXQiOjE3NDUyMTM0NDMsImV4cCI6MTc0NTI5OTg0M30.o94dUND3hMkTqVkI-tR9zCm0KnlGg36t_HIDQLY0b8s
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMDJkY2MzNi0yOTM5LTQ5MDYtOWU1Mi1iNzY4MmI3NWI4ZWIiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiI2NDc3NTU1NS03ZWU1LTRiMmQtYjFlNS04MTZlZjQ1ZDU1MmEiLCJ0eXBlIjoidXNlciIsImlhdCI6MTc0NTUwNzM5MCwiZXhwIjoxNzQ1NTkzNzkwfQ.CcAEDlxfWa0srAVzxIXoLg21sBxsalKhG8rlgqIKwxM
 
 
 ### UPDATE USER
 PATCH http://localhost:3000/user/3334c0d4-d8ff-46eb-a879-16e6bc3acd46
 Content-Type: application/json
+Authorization: Bearer
 
 {
     "name": "filipe Loback",
@@ -33,3 +33,4 @@ Content-Type: application/json
 
 ### DELETE USER
 DELETE http://localhost:3000/user/29c91523-35d3-49bc-8eb7-7776f13d4642
+Authorization: Bearer

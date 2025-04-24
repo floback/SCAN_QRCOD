@@ -27,6 +27,10 @@ export class CreateQrcodeTable1713300000002 implements MigrationInterface {
           isNullable: true,
         },
         {
+          name: 'img',
+          type: 'text',
+        },
+        {
           name: 'creation_date',
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',

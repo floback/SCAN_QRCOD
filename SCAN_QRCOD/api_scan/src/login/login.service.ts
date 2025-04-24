@@ -33,6 +33,7 @@ export class LoginService {
       sub: user.id,
       email: user.email,
       id_user: user.user.id,
+      type: user.user.type_user,
     };
 
     const token = await this.jwtService.signAsync(payload);
@@ -43,6 +44,7 @@ export class LoginService {
         id: user.user.id,
         name: user.user.name,
         email: user.email,
+        user: user.user.type_user,
       },
     };
   }
