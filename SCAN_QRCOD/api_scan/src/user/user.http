@@ -1,9 +1,10 @@
 ### CREATE USER
 POST http://localhost:3000/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUyMTQ1OSwiZXhwIjoxNzQ1NjA3ODU5fQ.OHPVgdcyf5DxR2dMZQNThqAb6PsIDvt-ZMVLqTNXslw
 
 {
-  "email": "filipe.siqueira@exemplo.com",
+  "email": "loback.filipe@exemplo.com",
   "name": "filipe siqueira",
   "password": "senha123",
   "status": true,
@@ -21,15 +22,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Y
 
 ### UPDATE USER
 PATCH http://localhost:3000/user/000b5d3b-e567-4a25-8f1f-2d725d06a26d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUxOTI4OCwiZXhwIjoxNzQ1NjA1Njg4fQ.Jg1b5L9DkdGBv25Qi_OMMHljcwnY91VnCsLWHCjNZhQ
 Content-Type: application/json
-Authorization: Bearer
 
 {
   "email": "filipe.loback@exemplo.com",
   "name": "filipe loback",
-  "password": "senha123",
-  "status": true,
-  "type_user": "admin",
+  "password": "123muda",
+  "status": false,
+  "type_user": "user",
 }
 
 ### DELETE USER
