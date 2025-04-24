@@ -3,32 +3,33 @@ POST http://localhost:3000/user
 Content-Type: application/json
 
 {
-  "email": "filipe_loback@exemplo.com",
-  "name": "Marcos Paulo",
+  "email": "filipe.siqueira@exemplo.com",
+  "name": "filipe siqueira",
   "password": "senha123",
-  "status": true
+  "status": true,
+  "type_user": "admin"
 }
 
 ### FIND BY ID
-GET http://localhost:3000/user/aa1fac24-6f51-4e36-a2d0-b08de6bb12cf
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMDJkY2MzNi0yOTM5LTQ5MDYtOWU1Mi1iNzY4MmI3NWI4ZWIiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiI2NDc3NTU1NS03ZWU1LTRiMmQtYjFlNS04MTZlZjQ1ZDU1MmEiLCJ0eXBlIjoidXNlciIsImlhdCI6MTc0NTUwNzM5MCwiZXhwIjoxNzQ1NTkzNzkwfQ.CcAEDlxfWa0srAVzxIXoLg21sBxsalKhG8rlgqIKwxM
+GET http://localhost:3000/user/3bbe3736-cbe0-4b01-868f-c8d5661397ec
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUxOTI4OCwiZXhwIjoxNzQ1NjA1Njg4fQ.Jg1b5L9DkdGBv25Qi_OMMHljcwnY91VnCsLWHCjNZhQ
 
 
 ### FIND ALL USER
 GET  http://localhost:3000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMDJkY2MzNi0yOTM5LTQ5MDYtOWU1Mi1iNzY4MmI3NWI4ZWIiLCJlbWFpbCI6Im1hcmNvc19wYXVsb0BleGVtcGxvLmNvbSIsImlkX3VzZXIiOiI2NDc3NTU1NS03ZWU1LTRiMmQtYjFlNS04MTZlZjQ1ZDU1MmEiLCJ0eXBlIjoidXNlciIsImlhdCI6MTc0NTUwNzM5MCwiZXhwIjoxNzQ1NTkzNzkwfQ.CcAEDlxfWa0srAVzxIXoLg21sBxsalKhG8rlgqIKwxM
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUxOTI4OCwiZXhwIjoxNzQ1NjA1Njg4fQ.Jg1b5L9DkdGBv25Qi_OMMHljcwnY91VnCsLWHCjNZhQ
 
 ### UPDATE USER
-PATCH http://localhost:3000/user/3334c0d4-d8ff-46eb-a879-16e6bc3acd46
+PATCH http://localhost:3000/user/000b5d3b-e567-4a25-8f1f-2d725d06a26d
 Content-Type: application/json
 Authorization: Bearer
 
 {
-    "name": "filipe Loback",
-    "email": "filipe_loback@exemplo.com",
-    "password": "123123",
-    "status": false
+  "email": "filipe.loback@exemplo.com",
+  "name": "filipe loback",
+  "password": "senha123",
+  "status": true,
+  "type_user": "admin",
 }
 
 ### DELETE USER

@@ -24,10 +24,13 @@ import { Role } from '../enums/role.enum';
       }
   
       const { user } = context.switchToHttp().getRequest();
-  
+
+      console.log('🚨 USER NO GUARD:', user);
+      
       if (!requiredRoles.includes(user.type_user)) {
         throw new ForbiddenException('Você não tem permissão para acessar essa rota.');
       }
+      
   
       return true;
     }

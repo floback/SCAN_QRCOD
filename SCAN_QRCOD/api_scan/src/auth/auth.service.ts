@@ -34,8 +34,10 @@ export class AuthService {
       sub: login.id,
       id_user: login.user.id,
       email: login.email,
-      type_user: login.user.type_user, // Corrigido aqui
+      type_user: login.user.type_user, // <- ESSENCIAL estar assim
     };
+    
+
 
     return {
       access_token: this.jwtService.sign(payload),
@@ -43,7 +45,7 @@ export class AuthService {
         id: login.user.id,
         email: login.email,
         name: login.user.name,
-        type_user: login.user.type_user, // Corrigido aqui
+        type_user: login.user.type_user,
       },
     };
   }
