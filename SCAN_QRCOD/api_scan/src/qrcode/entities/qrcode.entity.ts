@@ -1,4 +1,3 @@
-// src/qrcode/entities/qrcode.entity.ts
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -16,19 +15,22 @@ export class QrcodeEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.qrcodes, { onDelete: 'SET NULL' })
   @JoinColumn({ name: 'id_user' })
-  user: UserEntity;
+  id_user: UserEntity;
 
   @Column()
-  code: string; // código gerado para montar o link do QR
-
-  @Column({ nullable: true })
-  description: string;
+  code: string;
 
   @Column({ default: true })
   status: boolean;
 
   @Column({ type: 'text' })
-  img: string; // salvando a imagem base64 do QR Code
+  img: string;
+
+  @Column()
+  link_add: string;
+
+  @Column()
+  number_fone: number;
 
   @CreateDateColumn({ name: 'creation_date' })
   creationDate: Date;

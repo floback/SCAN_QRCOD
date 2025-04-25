@@ -1,11 +1,12 @@
-// src/qrcode/qrcode.service.ts
 import { Injectable } from '@nestjs/common';
 import * as QRCode from 'qrcode';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { QrcodeEntity } from './entities/qrcode.entity';
 import { CreateQrcodeDto } from './dto/create-qrcode.dto';
-import { UserEntity } from '../user/entities/user.entity';
+import { randomUUID } from 'crypto';
+import Jimp from 'jimp';
+
 
 @Injectable()
 export class QrcodeService {
@@ -14,34 +15,50 @@ export class QrcodeService {
     private readonly qrcodeRepository: Repository<QrcodeEntity>,
   ) {}
 
-  async generate(dto: CreateQrcodeDto) {
+  async generate(dto: CreateQrcodeDto, userId: string) {
     const baseUrl = process.env.QR_BASE_URL?.trim();
-    const url = `${baseUrl}/scan/${dto.code}`;
+    const code = dto.code || randomUUID();
+    const url = `${baseUrl}/scan/${code}`;
 
-    const image = await QRCode.toDataURL(url, {
+    // 1. Gera o QR como buffer (não como DataURL ainda!)
+    const qrBuffer = await QRCode.toBuffer(url, {
+      errorCorrectionLevel: 'H',
+      type: 'png',
       width: 300,
       margin: 2,
     });
 
+    // 2. Lê QR e logo
+    const qrImage = await Jimp.read(qrBuffer);
+    const logo = await Jimp.read('./src/qrcode/logo.jpeg');
+
+    // 3. Redimensiona a logo
+    logo.resize(qrImage.bitmap.width / 4, Jimp.AUTO);
+
+    // 4. Calcula posição central
+    const x = (qrImage.bitmap.width - logo.bitmap.width) / 2;
+    const y = (qrImage.bitmap.height - logo.bitmap.height) / 2;
+
+    // 5. Junta logo com QR
+    qrImage.composite(logo, x, y);
+
+    // 6. Converte imagem final para base64
+    const finalBuffer = await qrImage.getBufferAsync(Jimp.MIME_PNG);
+    const image = `data:image/png;base64,${finalBuffer.toString('base64')}`;
+
+    // 7. Salva no banco
     const newQr = this.qrcodeRepository.create({
-      code: dto.code,
-      description: dto.description,
-      user: { id: dto.id_user } as UserEntity,
-      img: image, // ✅ Nome correto do campo na entidade
+      code,
+      img: image,
+      link_add: dto.link_add,
+      number_fone: dto.number_fone,
     });
-    
 
     const saved = await this.qrcodeRepository.save(newQr);
 
-    console.log('✅ QR Code salvo:', saved);
-
     return {
-      message: 'QR Code gerado e salvo com sucesso',
-      id: saved.id,
-      id_user: saved.user?.id,
-      code: saved.code,
-      creationDate: saved.creationDate,
-      image: saved.img,
+      message: 'QR Code com logo gerado e salvo com sucesso',
+      data: saved,
     };
   }
 }

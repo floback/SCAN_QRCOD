@@ -1,8 +1,8 @@
-POST http://localhost:3000/qrcode
+POST http://localhost:3000/qrcode/generate
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTUyMTQ1OSwiZXhwIjoxNzQ1NjA3ODU5fQ.OHPVgdcyf5DxR2dMZQNThqAb6PsIDvt-ZMVLqTNXslw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTYwMjU5MCwiZXhwIjoxNzQ1Njg4OTkwfQ.tvyuY2hsxzTp-N5nafUNtrfJ6Lauz42g7s0THvSwKzo
+
 {
-  "code": "whatsapp-+5521971211060",
-  "description": "Link para conversa com suporte",
-  "id_user": "uuid-do-usuario"
+  "link_add": "https://wa.me/5599999999999?text=Olá%20quero%20saber%20mais!",
+  "number_fone": 5521971211060
 }
