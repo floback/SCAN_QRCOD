@@ -10,6 +10,7 @@ export class ScanService {
   constructor(
     @InjectRepository(ScanEntity)
     private readonly scanRepository: Repository<ScanEntity>,
+    @InjectRepository(QrcodeEntity)
     private readonly qrcodeRepository: Repository<QrcodeEntity>,
   ) {}
 
