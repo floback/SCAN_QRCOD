@@ -39,14 +39,31 @@ export class QrcodeService {
       img: image,
       link_add: dto.link_add,
       number_fone: dto.number_fone,
+      id_user: { id: userId }, // <- assim funciona
     });
-  
+
     const saved = await this.qrcodeRepository.save(newQr);
-  
+    
     return {
       message: 'QR Code gerado sem logo e salvo com sucesso',
       data: saved,
     };
   }
+
+  async delete(id: string) {
+    const qrcode = await this.qrcodeRepository.findOne({ where: { id } });
+  
+    if (!qrcode) {
+      throw new Error('QR Code não encontrado');
+    }
+  
+    await this.qrcodeRepository.remove(qrcode);
+  
+    return {
+      message: `QR Code com id ${id} deletado com sucesso`,
+    };
+  }
+  
+  
   
 }

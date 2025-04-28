@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request, Delete, Param } from '@nestjs/common';
 import { QrcodeService } from './qrcode.service';
 import { CreateQrcodeDto } from './dto/create-qrcode.dto';
 import { JwtAuthGuard } from '../auth/guard/jtw-auth-guard';
@@ -15,5 +15,13 @@ export class QrcodeController {
   async generate(@Body() dto: CreateQrcodeDto, @Request() req) {
     const userId = req.user?.id; // Extraído do token JWT
     return this.qrcodeService.generate(dto, userId);
+  }
+
+  
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.qrcodeService.delete(id);
   }
 }

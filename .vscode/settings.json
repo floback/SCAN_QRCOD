@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "Auth and Guard"
+        "Auth and Guard",
+        "qrcode component"
     ]
 }

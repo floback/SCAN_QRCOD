@@ -22,5 +22,20 @@ export class ScanService {
   async findByCode(code: string) {
     return this.qrcodeRepository.findOne({ where: { code } });
   }
+
+  async delete(id: string) {
+    const qrcode = await this.qrcodeRepository.findOne({ where: { id } });
+  
+    if (!qrcode) {
+      throw new Error('QR Code não encontrado');
+    }
+  
+    await this.qrcodeRepository.remove(qrcode);
+  
+    return {
+      message: `QR Code com id ${id} deletado com sucesso`,
+    };
+  }
+
   
 }

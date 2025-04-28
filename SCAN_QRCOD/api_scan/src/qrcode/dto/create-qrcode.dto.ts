@@ -2,6 +2,7 @@ import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class CreateQrcodeDto {
 
+
   @IsString()
   link_add: string;
 
@@ -11,6 +12,9 @@ export class CreateQrcodeDto {
   @IsOptional()
   status?: boolean;
   
+  @IsOptional()
+  @IsString()
+
   @IsOptional()
   @IsString()
   code?: string; // ← ESSE CAMPO AQUI

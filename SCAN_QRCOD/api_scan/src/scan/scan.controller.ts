@@ -1,5 +1,5 @@
 // src/scan/scan.controller.ts
-import { Controller, Get, Req, Param, Post, Body, Res } from '@nestjs/common';
+import { Controller, Get, Req, Param, Post, Body, Res, Delete } from '@nestjs/common';
 import { Request } from 'express';
 import * as geoip from 'geoip-lite';
 import { ScanService } from './scan.service';
@@ -118,4 +118,7 @@ export class ScanController {
     console.log(saved)
     return { message: 'Localização GPS salva com sucesso!', data: saved };
   }
+
+
+ 
 }
