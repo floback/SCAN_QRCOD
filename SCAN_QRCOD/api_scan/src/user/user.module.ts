@@ -7,6 +7,7 @@ import { LoginEntity } from 'src/login/entities/login.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity, LoginEntity])],
+  exports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UserController],
   providers: [UserService],
 })

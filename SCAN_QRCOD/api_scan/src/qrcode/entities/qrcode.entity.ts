@@ -1,37 +1,30 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  JoinColumn,
-  CreateDateColumn,
-} from 'typeorm';
-import { UserEntity } from '../../user/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Entity('qrcode')
 export class QrcodeEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.qrcodes, { onDelete: 'SET NULL' })
-  @JoinColumn({ name: 'id_user' })
-  id_user: UserEntity;
-
   @Column()
+  id_user: string;
+
+  @Column({ type: 'varchar', length: 255 })
   code: string;
 
-  @Column({ default: true })
+  @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @Column({ type: 'text' })
-  img: string;
+  @Column({ type: 'varchar', length: 255, nullable: true })
+  number_fone: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 255, nullable: true })
   link_add: string;
 
-  @Column()
-  number_fone: number;
+  @Column({ type: 'text', nullable: true })
+  img: string;
 
-  @CreateDateColumn({ name: 'creation_date' })
-  creationDate: Date;
+  @ManyToOne(() => UserEntity, (user) => user.qrcodes)
+  @JoinColumn({ name: 'id_user' }) // <<<<<< AQUI VOCÊ INFORMA O NOME CERTO
+  user: UserEntity;
 }

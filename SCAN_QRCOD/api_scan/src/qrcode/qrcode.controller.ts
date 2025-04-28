@@ -1,27 +1,66 @@
-import { Controller, Post, Body, UseGuards, Request, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Delete, NotFoundException, UseGuards, Patch } from '@nestjs/common';
 import { QrcodeService } from './qrcode.service';
-import { CreateQrcodeDto } from './dto/create-qrcode.dto';
-import { JwtAuthGuard } from '../auth/guard/jtw-auth-guard';
+import { QrcodeEntity } from './entities/qrcode.entity';
+import { JwtAuthGuard } from 'src/auth/guard/jtw-auth-guard';
+import { Request } from '@nestjs/common';
 import { Roles } from 'src/auth/decoraters/ roles.decorator';
-import { Role } from 'src/auth/enums/role.enum';
+import { CreateQrcodeDto } from './dto/create-qrcode.dto';
+
+
+
 
 @Controller('qrcode')
 export class QrcodeController {
   constructor(private readonly qrcodeService: QrcodeService) {}
 
-  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
+  @Roles()
   @UseGuards(JwtAuthGuard)
-  @Post('generate')
-  async generate(@Body() dto: CreateQrcodeDto, @Request() req) {
-    const userId = req.user?.id; // Extraído do token JWT
-    return this.qrcodeService.generate(dto, userId);
+  @Post()
+  async createQRCode(
+    @Request() req,
+    @Body('number_fone') number_fone: string,
+    @Body('link_add') link_add: string,
+  ): Promise<QrcodeEntity> {
+    const id_user = req.user.id_user;
+    return this.qrcodeService.createQRCode(id_user, number_fone, link_add);
   }
 
-  
-  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
-  @UseGuards(JwtAuthGuard)
+
+    // qrcode.controller.ts
+    @Get()
+    async findAll(): Promise<QrcodeEntity[]> {
+      return this.qrcodeService.findAll();
+    }
+
+   // Buscar QRCode por ID
+   @Get(':id')
+   async findById(@Param('id') id: string): Promise<QrcodeEntity> {
+     const qrcode = await this.qrcodeService.findById(id);
+     if (!qrcode) {
+       throw new NotFoundException(`QRCode com ID ${id} não encontrado.`);
+     }
+     return qrcode;
+   }
+
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: string): Promise<string> {
     return this.qrcodeService.delete(id);
+  }
+
+  @Get('whatsapp/:id')
+  async openWhatsapp(@Param('id') id: string): Promise<string> {
+    const qrcode = await this.qrcodeService.findById(id);
+    if (!qrcode) {
+      throw new Error('QRCode não encontrado');
+    }
+    return this.qrcodeService.openWhatsapp(qrcode.number_fone);
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() createQrcodeDto: CreateQrcodeDto,
+  ): Promise<QrcodeEntity> {
+    return this.qrcodeService.update(id, createQrcodeDto);
   }
 }

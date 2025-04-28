@@ -17,10 +17,6 @@ export class CreateQrcodeTable1713300000002 implements MigrationInterface {
           type: 'varchar',
         },
         {
-          name: 'description',
-          type: 'varchar',
-        },
-        {
           name: 'id_user',
           type: 'char',
           length: '36',
@@ -35,6 +31,20 @@ export class CreateQrcodeTable1713300000002 implements MigrationInterface {
           type: 'timestamp',
           default: 'CURRENT_TIMESTAMP',
         },
+        {
+          name: 'link_add',
+          type: 'varchar',
+          length: '255',
+        },
+        {
+          name: 'number_fone',
+          type: 'varchar',
+          length: '20',
+        },        
+        {
+          name: 'status',
+          type: 'boolean'
+        }
       ],
     }));
 
