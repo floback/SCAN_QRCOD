@@ -33,7 +33,7 @@ export class QrcodeService {
     }
   
     // 3. Monta o link que vai dentro do QR Code (aponta para o backend)
-    const backendBaseUrl = 'https://seudominio.com'; // <-- troque para seu domínio real
+    const backendBaseUrl = process.env.BASE_URL || 'https://66fc-132-255-43-78.ngrok-free.app'; // <-- troque para seu domínio real
     const qrRedirectLink = `${backendBaseUrl}/scan/${uniqueCode}`;
   
     // 4. Gera a imagem Base64 do QR Code com o link do backend
