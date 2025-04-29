@@ -19,14 +19,14 @@ export class CreateUsersTable1713300000000 implements MigrationInterface {
         },
         {
           name: 'email',
-            type: 'varchar',
-            length: '255',
-            isUnique: true,
+          type: 'varchar',
+          length: '255',
+          isUnique: true,
         },
         {
           name: 'password',
-            type: 'varchar',
-            length: '255',
+          type: 'varchar',
+          length: '255',
         },
         {
         name: 'type_user',
@@ -44,6 +44,12 @@ export class CreateUsersTable1713300000000 implements MigrationInterface {
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',
         },
+        {
+          name: 'update_at',
+          type: 'timestamp',
+          default: 'CURRENT_TIMESTAMP',
+
+        }
       ],
     }));
   }

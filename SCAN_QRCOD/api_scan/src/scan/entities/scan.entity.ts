@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { QrcodeEntity } from '../../qrcode/entities/qrcode.entity';
 
 @Entity('scan_logs')
@@ -22,24 +22,15 @@ export class ScanEntity {
   @Column()
   city: string;
 
-  @Column('float', { nullable: true })
-  accuracy: number;
-
-  @Column('float', { nullable: true })
-  altitude: number;
-
-  @Column('float', { nullable: true })
-  heading: number;
-
-  @Column('float', { nullable: true })
-  speed: number;
-
   @Column()
   region: string;
 
-  @Column('float')
+  @Column('float', { nullable: true })
   latitude: number | null;
 
-  @Column('float')
+  @Column('float', { nullable: true })
   longitude: number | null;
+
+  @CreateDateColumn()
+  create_date: Date;
 }

@@ -23,36 +23,40 @@ export class QrcodeService {
     number_fone: string,
     link_add: string,
   ): Promise<QrcodeEntity> {
-    // 1. Monta o link final
+    // 1. Gera um código único usando UUID
+    const uniqueCode = uuidv4();
+  
+    // 2. Define o link que será redirecionado após o scan (salvo no banco)
     let finalLink = link_add;
     if (!finalLink && number_fone) {
       finalLink = `https://wa.me/${number_fone}`;
     }
-
-    // 2. Gera imagem Base64
-    const img = await QRCode.toDataURL(finalLink);
-
-    // 3. Gera um código único usando UUID
-    const uniqueCode = uuidv4(); // Gera um UUID único, como "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-
-    // 4. Log dos valores para depuração
+  
+    // 3. Monta o link que vai dentro do QR Code (aponta para o backend)
+    const backendBaseUrl = 'https://seudominio.com'; // <-- troque para seu domínio real
+    const qrRedirectLink = `${backendBaseUrl}/scan/${uniqueCode}`;
+  
+    // 4. Gera a imagem Base64 do QR Code com o link do backend
+    const img = await QRCode.toDataURL(qrRedirectLink);
+  
+    // 5. Log para debug
     console.log('Código único gerado: ', uniqueCode);
-    console.log('Link final: ', finalLink);
-    console.log('Imagem gerada (Base64): ', img);
-
-    // 5. Cria o QRCode no banco
+    console.log('Link de redirecionamento final: ', finalLink);
+    console.log('Link dentro do QR Code (scan): ', qrRedirectLink);
+  
+    // 6. Cria e salva no banco
     const qrcode = this.qrcodeRepository.create({
       id_user,
-      code: uniqueCode, // Usando o UUID como código único
+      code: uniqueCode,
       img,
       status: true,
-      link_add: finalLink,
+      link_add: finalLink,     // salvo para uso posterior no redirecionamento
       number_fone,
     });
-
-    // 6. Salva no banco
+  
     return await this.qrcodeRepository.save(qrcode);
   }
+  
   
   
 

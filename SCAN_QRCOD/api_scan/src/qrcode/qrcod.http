@@ -1,7 +1,7 @@
 ### CREATE QRCODE qrcode
 POST http://localhost:3000/qrcode
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTkzNzM0MSwiZXhwIjoxNzQ2MDIzNzQxfQ.HEOb40oAbt75-Ia_K25YyJivC4tosL4F9zFGeiiW1Dg
 
 {
   "number_fone": "5521971211060",
@@ -28,4 +28,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Y
 {
   "number_fone": "",
   "link_add": "google.com.br"
-}
+}'

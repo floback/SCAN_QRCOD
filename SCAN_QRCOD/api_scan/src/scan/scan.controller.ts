@@ -1,6 +1,6 @@
 // src/scan/scan.controller.ts
-import { Controller, Get, Req, Param, Post, Body, Res, Delete } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Req, Param, Post, Body, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import * as geoip from 'geoip-lite';
 import { ScanService } from './scan.service';
 import { Lookup } from 'geoip-lite';
@@ -10,35 +10,40 @@ export class ScanController {
   constructor(private readonly scanService: ScanService) {}
 
   @Get(':qrId')
-  async handleScanGet(@Req() req: Request, @Param('qrId') qrId: string, @Res() res: any) {
-    const ip =
+  async handleScanGet(@Req() req: Request, @Param('qrId') qrId: string, @Res() res: Response) {
+    const rawIp =
       req.headers['x-forwarded-for']?.toString().split(',')[0].trim() ||
       req.socket.remoteAddress ||
       '127.0.0.1';
-  
-    const ipString = typeof ip === 'string' ? ip : '';
+
+    const ipString = typeof rawIp === 'string' ? rawIp : '';
     const geo = geoip.lookup(ipString) as Lookup | null;
-  
-    // 👉 Busca o QR Code pelo código
+
+    console.log('🔎 IP:', ipString);
+    console.log('🌍 Geo:', geo);
+
     const qr = await this.scanService.findByCode(qrId);
     if (!qr) {
       return res.status(404).send('QR Code não encontrado!');
     }
-  
+
+    const latitude = geo?.ll?.[0] ?? null;
+    const longitude = geo?.ll?.[1] ?? null;
+
     const scanData = {
-      qrId,
+      id_qrcode: qr.id,
       ip: ipString,
-      country: geo?.country || 'Desconhecida',
+      country: geo?.country || 'Desconhecido',
       city: geo?.city || 'Desconhecida',
       region: geo?.region || 'Desconhecida',
+      latitude,
+      longitude,
     };
-  
-    // 👉 Redirecionamento baseado nos dados
+
     const redirectTo = qr.number_fone
       ? `https://wa.me/${qr.number_fone}`
       : qr.link_add;
-  
-    // Envia HTML com JS para capturar GPS + depois redirecionar
+
     return res.send(`
       <html>
         <head>
@@ -52,73 +57,36 @@ export class ScanController {
           <h2>QR Code escaneado com sucesso!</h2>
           <p><strong>IP:</strong> ${scanData.ip}</p>
           <p><strong>Localização estimada:</strong> ${scanData.city}, ${scanData.region} - ${scanData.country}</p>
-          <p id="gps-info">Buscando localização precisa...</p>
-  
+          <p><strong>Latitude:</strong> ${scanData.latitude ?? 'Não disponível'}</p>
+          <p><strong>Longitude:</strong> ${scanData.longitude ?? 'Não disponível'}</p>
+          <p>Redirecionando em instantes...</p>
+
           <script>
-            navigator.geolocation.getCurrentPosition(
-              async (pos) => {
-                const latitude = pos.coords.latitude;
-                const longitude = pos.coords.longitude;
-  
-                document.getElementById('gps-info').innerHTML = 
-                  '📍 GPS: ' + latitude + ', ' + longitude;
-  
-                try {
-                  await fetch('/scan/save', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                      id_qrcode: '${scanData.qrId}',
-                      ip: '${scanData.ip}',
-                      country: '${scanData.country}',
-                      city: '${scanData.city}',
-                      region: '${scanData.region}',
-                      latitude,
-                      longitude
-                    })
-                  });
-                } catch (err) {
-                  console.error('Erro ao salvar GPS:', err);
-                }
-  
-                // Aguarda 2 segundos e redireciona
-                setTimeout(() => {
-                  window.location.href = '${redirectTo}';
-                }, 2000);
-              },
-              (err) => {
-                document.getElementById('gps-info').innerHTML = 
-                  'Erro ao obter localização: ' + err.message;
-  
-                setTimeout(() => {
-                  window.location.href = '${redirectTo}';
-                }, 2000);
-              },
-              { enableHighAccuracy: true }
-            );
+            fetch('/scan/save', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(${JSON.stringify(scanData)})
+            }).then(res => res.json())
+              .then(data => {
+                console.log('📍 Dados salvos com sucesso:', data);
+              })
+              .catch(err => {
+                document.body.innerHTML += '<p style="color:red;">Erro ao salvar localização: ' + err + '</p>';
+              });
+
+            setTimeout(() => {
+              window.location.href = '${redirectTo}';
+            }, 2000);
           </script>
         </body>
       </html>
     `);
   }
-  
 
   @Post('save')
   async handleGpsSave(@Body() body: any) {
     const saved = await this.scanService.create(body);
-    console.log('📍 GPS REAL SALVO no banco:', {
-      id_qrcode: body.id_qrcode,
-      latitude: body.latitude,
-      longitude: body.longitude,
-      ip: body.ip,
-      cidade: body.city,
-      estado: body.region,
-      pais: body.country,
-    });
-    console.log(saved)
-    return { message: 'Localização GPS salva com sucesso!', data: saved };
+    console.log('📍 Dados de scan salvos:', saved);
+    return { message: 'Localização registrada com sucesso!', data: saved };
   }
-
-
- 
 }

@@ -13,23 +13,18 @@ export class CreateQrcodeTable1713300000002 implements MigrationInterface {
           default: '(UUID())',
         },
         {
-          name: 'code',
-          type: 'varchar',
-        },
-        {
           name: 'id_user',
           type: 'char',
           length: '36',
           isNullable: true,
         },
         {
-          name: 'img',
-          type: 'text',
+          name: 'code',
+          type: 'varchar',
         },
         {
-          name: 'creation_date',
-          type: 'timestamp',
-          default: 'CURRENT_TIMESTAMP',
+          name: 'img',
+          type: 'text',
         },
         {
           name: 'link_add',
@@ -44,6 +39,17 @@ export class CreateQrcodeTable1713300000002 implements MigrationInterface {
         {
           name: 'status',
           type: 'boolean'
+        },
+        {
+          name: 'creation_date',
+          type: 'timestamp',
+          default: 'CURRENT_TIMESTAMP',
+        },
+        {
+          name: 'update_at',
+          type: 'timestamp',
+          default: 'CURRENT_TIMESTAMP',
+
         }
       ],
     }));
