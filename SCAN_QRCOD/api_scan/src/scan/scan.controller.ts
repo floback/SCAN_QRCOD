@@ -1,15 +1,18 @@
 // src/scan/scan.controller.ts
-import { Controller, Get, Req, Param, Post, Body, Res } from '@nestjs/common';
+import { Controller, Get, Req, Param, Post, Body, Res, Delete, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 import * as geoip from 'geoip-lite';
 import { ScanService } from './scan.service';
 import { Lookup } from 'geoip-lite';
+import { Roles } from 'src/auth/decoraters/ roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
+import { JwtAuthGuard } from 'src/auth/guard/jtw-auth-guard';
 
 @Controller('scan')
 export class ScanController {
-  constructor(private readonly scanService: ScanService) {}
+  constructor(private readonly scanService: ScanService) { }
 
-  @Get(':qrId')
+  @Get(':Id')
   async handleScanGet(@Req() req: Request, @Param('qrId') qrId: string, @Res() res: Response) {
     const rawIp =
       req.headers['x-forwarded-for']?.toString().split(',')[0].trim() ||
@@ -83,10 +86,39 @@ export class ScanController {
     `);
   }
 
+
   @Post('save')
   async handleGpsSave(@Body() body: any) {
     const saved = await this.scanService.create(body);
     console.log('📍 Dados de scan salvos:', saved);
     return { message: 'Localização registrada com sucesso!', data: saved };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER, Role.VIWER)
+  @Get()
+  async getAllScans() {
+    return await this.scanService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER, Role.VIWER)
+  @Get(':id')
+  async getScanById(@Param('id') id: string) {
+    return await this.scanService.findById(id);
+  }
+
+  @Get('find/:id')
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER, Role.VIWER)
+  async findById(@Param('id') id: string) {
+    return await this.scanService.findById(id);
+}
+
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
+  @Delete(':id')
+  async deleteScan(@Param('id') id: string) {
+    return await this.scanService.delete(id);
   }
 }

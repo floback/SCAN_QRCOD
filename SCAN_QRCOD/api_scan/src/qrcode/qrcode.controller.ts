@@ -5,6 +5,7 @@ import { JwtAuthGuard } from 'src/auth/guard/jtw-auth-guard';
 import { Request } from '@nestjs/common';
 import { Roles } from 'src/auth/decoraters/ roles.decorator';
 import { CreateQrcodeDto } from './dto/create-qrcode.dto';
+import { Role } from 'src/auth/enums/role.enum';
 
 
 
@@ -13,8 +14,8 @@ import { CreateQrcodeDto } from './dto/create-qrcode.dto';
 export class QrcodeController {
   constructor(private readonly qrcodeService: QrcodeService) {}
 
-  @Roles()
   @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
   @Post()
   async createQRCode(
     @Request() req,
@@ -25,14 +26,15 @@ export class QrcodeController {
     return this.qrcodeService.createQRCode(id_user, number_fone, link_add);
   }
 
-
-    // qrcode.controller.ts
+    @UseGuards(JwtAuthGuard)
+    @Roles(Role.OWNER, Role.ADMIN, Role.USER, Role.VIWER)
     @Get()
     async findAll(): Promise<QrcodeEntity[]> {
       return this.qrcodeService.findAll();
     }
 
-   // Buscar QRCode por ID
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER, Role.VIWER)
    @Get(':id')
    async findById(@Param('id') id: string): Promise<QrcodeEntity> {
      const qrcode = await this.qrcodeService.findById(id);
@@ -41,11 +43,14 @@ export class QrcodeController {
      }
      return qrcode;
    }
-
+  
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER) 
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<string> {
     return this.qrcodeService.delete(id);
   }
+
 
   @Get('whatsapp/:id')
   async openWhatsapp(@Param('id') id: string): Promise<string> {
@@ -56,6 +61,8 @@ export class QrcodeController {
     return this.qrcodeService.openWhatsapp(qrcode.number_fone);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Roles(Role.OWNER, Role.ADMIN, Role.USER)
   @Patch(':id')
   async update(
     @Param('id') id: string,

@@ -1,5 +1,5 @@
 // src/scan/scan.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ScanEntity } from './entities/scan.entity';
@@ -23,18 +23,27 @@ export class ScanService {
     return this.qrcodeRepository.findOne({ where: { code } });
   }
 
-  async delete(id: string) {
-    const qrcode = await this.qrcodeRepository.findOne({ where: { id } });
-  
-    if (!qrcode) {
-      throw new Error('QR Code não encontrado');
-    }
-  
-    await this.qrcodeRepository.remove(qrcode);
-  
-    return {
-      message: `QR Code com id ${id} deletado com sucesso`,
-    };
+  async findAll() {
+    return await this.scanRepository.find({ order: { create_date: 'DESC' } });
   }
 
+  async findById(id: string) {
+    const scan = await this.scanRepository.findOne({ where: { id } });
+    if (!scan) {
+      throw new NotFoundException(`Registro de scan com ID ${id} não encontrado.`);
+    }
+    return scan;
+  }
+
+  async delete(id: string) {
+    const scan = await this.scanRepository.findOne({ where: { id } });
+    if (!scan) {
+      throw new NotFoundException(`Registro de scan com ID ${id} não encontrado.`);
+    }
+    await this.scanRepository.remove(scan);
+    return { message: `Registro de scan com ID ${id} deletado com sucesso.` };
+  }
+
+  // FIND BY ID
+  
 }
