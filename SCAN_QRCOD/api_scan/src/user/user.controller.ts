@@ -20,41 +20,43 @@ import { Role } from 'src/auth/enums/role.enum';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.OWNER, Role.ADMIN)
+
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.OWNER, Role.ADMIN)
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
+    console.log(createUserDto)
     return this.userService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.OWNER, Role.ADMIN)
-  @Get()
-  findAll(): Promise<UserEntity[]> {
-    return this.userService.findAll();
-  }
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.OWNER, Role.ADMIN)
+  // @Get()
+  // findAll(): Promise<UserEntity[]> {
+  //   return this.userService.findAll();
+  // }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.OWNER, Role.ADMIN)
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<UserEntity> {
-    return this.userService.findOne(id);
-  }
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.OWNER, Role.ADMIN)
+  // @Get(':id')
+  // findOne(@Param('id') id: string): Promise<UserEntity> {
+  //   return this.userService.findOne(id);
+  // }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.OWNER, Role.ADMIN)
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() createUserDto: CreateUserDto,
-  ): Promise<UserEntity> {
-    return this.userService.update(id, createUserDto);
-  }
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.OWNER, Role.ADMIN)
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() createUserDto: CreateUserDto,
+  // ): Promise<UserEntity> {
+  //   return this.userService.update(id, createUserDto);
+  // }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.OWNER, Role.ADMIN)
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(id);
-  }
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Roles(Role.OWNER, Role.ADMIN)
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.userService.remove(id);
+  // }
 }

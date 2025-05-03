@@ -1,12 +1,12 @@
 import { stringify } from 'querystring';
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
-export class CreateLoginTable1713300000001 implements MigrationInterface {
+export class CreateAuthTable1713300000001 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Criação da tabela 'login'
+    // Criação da tabela 'Auth'
     await queryRunner.createTable(
       new Table({
-        name: 'login',
+        name: 'auth',
         columns: [
           {
             name: 'id',
@@ -22,21 +22,21 @@ export class CreateLoginTable1713300000001 implements MigrationInterface {
               isNullable: true,
           },
           {
-            name: 'email',
-              type: 'varchar',
-              length: '255',
+            name: 'attempt_time',
+            type: 'timestamp',
+            default: 'CURRENT_TIMESTAMP',
           },
           {
-            name: 'password',
-              type: 'varchar',
-              length: '255',
-          },
+          name: 'token',
+          type: 'char',
+          length: '255'
+          }
         ],
       })
     );
 
     await queryRunner.createForeignKey(
-      'login',
+      'auth',
       new TableForeignKey({
         columnNames: ['id_user'],
         referencedColumnNames: ['id'],
@@ -47,7 +47,7 @@ export class CreateLoginTable1713300000001 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('login');
+    const table = await queryRunner.getTable('auth');
     if (!table) return;
   
     const foreignKey = table.foreignKeys.find(
@@ -55,10 +55,10 @@ export class CreateLoginTable1713300000001 implements MigrationInterface {
     );
   
     if (foreignKey) {
-      await queryRunner.dropForeignKey('login', foreignKey);
+      await queryRunner.dropForeignKey('auth', foreignKey);
     }
   
-    await queryRunner.dropTable('login');
+    await queryRunner.dropTable('auth');
   }
   
 }

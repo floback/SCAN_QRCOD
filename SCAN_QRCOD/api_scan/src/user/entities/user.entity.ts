@@ -1,5 +1,4 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { LoginEntity } from '../../login/entities/login.entity';
 import { UserType } from '../dto/create-user.dto';
 import { QrcodeEntity } from 'src/qrcode/entities/qrcode.entity';
 
@@ -22,9 +21,6 @@ export class UserEntity {
 
   @Column({ default: true })
   status: boolean;
-
-  @OneToMany(() => LoginEntity, (login) => login.user)
-  logins: LoginEntity[];
 
   @OneToMany(() => QrcodeEntity, (qrcode) => qrcode.user) 
   qrcodes: QrcodeEntity[];

@@ -5,8 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { ScanModule } from './scan/scan.module';
 import { UserModule } from './user/user.module';
 import { QRCodeModule } from './qrcode/qrcode.module';
-import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -24,8 +24,8 @@ import { AuthModule } from './auth/auth.module';
     ScanModule,
     UserModule,
     QRCodeModule,
-    LoginModule,
     AuthModule,
+    EmailModule,
   ],
 })
 export class AppModule {}
