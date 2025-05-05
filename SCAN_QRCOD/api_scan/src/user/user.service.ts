@@ -23,7 +23,11 @@ export class UserService {
       throw new ConflictException(`E-mail ${userExisting} already exists`);
     }
     
-    const user = this.userRepository.create(createUserDto);
+    const hashePassword = await bcrypt.hash(createUserDto.password, 10);
+    const user = this.userRepository.create({
+      ...createUserDto,
+      password: hashePassword,
+    });
     return await this.userRepository.save(user);
   }
 
@@ -47,6 +51,10 @@ export class UserService {
     createUserDto: Partial<CreateUserDto>,
    ): Promise<UserEntity> {
       const user = await this.findById(id);
+      
+      if (createUserDto.password) {
+        createUserDto.password = await bcrypt.hash(createUserDto.password, 10)
+      }
 
       if ( createUserDto.email && createUserDto.email !== user.email ) {
         const existing = await this.userRepository.findOne({
@@ -56,7 +64,7 @@ export class UserService {
             throw new ConflictException(`This is e-mail ${createUserDto.email} existing`);
         }
       }
-      const updated = Object.assign(user, createUserDto);
+      const updated = Object.assign( user, createUserDto );
       return await this.userRepository.save(updated);
    }
 

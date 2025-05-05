@@ -4,8 +4,8 @@ Content-Type: application/json
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTU4NDI2MywiZXhwIjoxNzQ1NjcwNjYzfQ.UnYkDhQrAX-96WhGjLMiFg6VRhefhhQCT6COb9Vtgig
 
 {
-  "email": "julia.nelles@exemplo.com",
-  "name": "julia nelles",
+  "email": "carlos.miguel@exemplo.com",
+  "name": "carlos miguel",
   "password": "senha123",
   "status": true,
   "type_user": "user"
@@ -13,25 +13,25 @@ Content-Type: application/json
 
 ### FIND BY ID
 GET http://localhost:3000/user/8824fcd9-4773-448a-8988-596a5bc7fc1a
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjQ2ODMxMCwiZXhwIjoxNzQ2NTU0NzEwfQ.hv0s333HhCbemhGMdd0Vkd0VVbnW5_hqFREBxzN-dHY
 
 ### FIND ALL USER
 GET  http://localhost:3000/user
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5NjEyMWNkZS0xYWUwLTQzNjMtYjEyNC01ZWQ5ZjUxNWU2NTUiLCJlbWFpbCI6ImNhcmxvcy5taWd1ZWxAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJ1c2VyIiwiaWF0IjoxNzQ2NDY4NDAwLCJleHAiOjE3NDY1NTQ4MDB9.xQ2avRPB95KZZXK8L8EGVxDGd83hPRMrq872DClIs5E
 
 ### UPDATE USER
-PATCH http://localhost:3000/user/f57832f5-632f-487d-9421-f9f22fcf5b77
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I
+PATCH http://localhost:3000/user/8a28c872-7fd9-4a14-b097-9ae700a4a
+Authorization: BearereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY0NjY1MTIsImV4cCI6MTc0NjU1MjkxMn0.FMhutd4O5X3lF99N_AEJ3AKufjPUBHgkLeQzomHExT8
 Content-Type: application/json
 
 {
-  "email": "julia.neles@exemplo.com",
-  "name": "julia neles",
-  "password": "123muda",
+  "email": "loback.filipe@exemplo.com",
+  "name": "filipe siqueira",
+  "password": "senha123",
   "status": true,
-  "type_user": "user"
+  "type_user": "admin"
 }
 
 ### DELETE USER
-DELETE http://localhost:3000/user/000b5d3b-e567-4a25-8f1f-2d725d06a26d
+DELETE http://localhost:3000/user/0504936b-a3a8-409c-a56d-56fde4d3ce29
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I
