@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "Auth and Guard",
         "qrcode component",
-        "Scan module"
+        "Scan module",
+        "User module"
     ]
 }

@@ -31,27 +31,28 @@ export class UserController {
 
   // @UseGuards(JwtAuthGuard, RolesGuard)
   // @Roles(Role.OWNER, Role.ADMIN)
-  // @Get()
-  // findAll(): Promise<UserEntity[]> {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAll(): Promise<UserEntity[]> {
+    return this.userService.findAll();
+  }
+ 
 
   // @UseGuards(JwtAuthGuard, RolesGuard)
   // @Roles(Role.OWNER, Role.ADMIN)
-  // @Get(':id')
-  // findOne(@Param('id') id: string): Promise<UserEntity> {
-  //   return this.userService.findOne(id);
-  // }
+    @Get(':id')
+    findById(@Param('id') id: string): Promise<UserEntity>{
+      return this.userService.findById(id);
+    }
 
   // @UseGuards(JwtAuthGuard, RolesGuard)
   // @Roles(Role.OWNER, Role.ADMIN)
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() createUserDto: CreateUserDto,
-  // ): Promise<UserEntity> {
-  //   return this.userService.update(id, createUserDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<UserEntity> {
+    return this.userService.updateUser(id, createUserDto);
+  }
 
   // @UseGuards(JwtAuthGuard, RolesGuard)
   // @Roles(Role.OWNER, Role.ADMIN)
