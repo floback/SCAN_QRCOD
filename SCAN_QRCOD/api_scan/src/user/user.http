@@ -21,13 +21,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3M
 
 ### UPDATE USER
 PATCH http://localhost:3000/user/8a28c872-7fd9-4a14-b097-9ae700a4afe2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjYzMzIzNywiZXhwIjoxNzQ2NzE5NjM3fQ.BtHrfFGtY-6_7ytZ4c1k2RAUeIXFT7n5Hj_A7cZQ5BU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBub3ZhbmV0LXJqLmNvbS5iciIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNzQ2NjM5NjUyLCJleHAiOjE3NDY3MjYwNTJ9.ImhznG6uIN9DEh25yfszP-K2WCGhjtNhBJ8O1koPgC8
 Content-Type: application/json
 
 {
-  "email": "filipe.siqueira@novanet-rj.com",
+  "email": "filipe.siqueira@novanet-rj.com.br",
   "name": "filipe siqueira",
-  "password": "senha123",
+  "password": "senha1234",
   "status": true,
   "type_user": "admin"
 }

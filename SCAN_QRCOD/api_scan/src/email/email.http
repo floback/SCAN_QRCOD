@@ -1,7 +1,18 @@
-### REC SENHA
-POST http://localhost:3000/email/recover-password
+### Enviar e-mail de recuperação de senha
+POST http://localhost:3000/email/recovery-password
 Content-Type: application/json
 
 {
-    "email": "filipe."
+  "email": "filipe.siqueira@novanet-rj.com.br"
+}
+
+### NOVA SENHA
+POST http://localhost:3000/email/reset-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiOGEyOGM4NzItN2ZkOS00YTE0LWIwOTctOWFlNzAwYTRhZmUyIiwiaWF0IjoxNzQ2NjQ4ODI4LCJleHAiOjE3NDY2NDk0Mjh9.rGLLPqYelkBjSUTMSDh608fNWovuNOdNdGWxQjTl7sA
+Content-Type: application/json
+Body:
+
+{
+  "newPassword": "1234",
+  "confirmPassword": "1234"
 }

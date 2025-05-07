@@ -1,14 +1,26 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { EmailService } from './email.service';
-import { CreateEmailDto } from './dto/create-email.dto';
+import { CreateEmailDto, ResetPasswordDto } from './dto/create-email.dto';
 
 @Controller('email')
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  @Post('recover-password')
-  async recoverPassword(@Body() dto: CreateEmailDto) {
-    const result = await this.emailService.recoverPassword(dto);
-    return { message: result };
+
+  @Post('recovery-password')
+  async sendRecoveryEmail(@Body('email') email: string) {
+    return await this.emailService.sendRecoveryEmail(email);
+  }
+  
+
+  @Post('reset-password')
+  async resetPassword(@Body() body: ResetPasswordDto) {
+    const { token, newPassword, confirmPassword } = body;
+  
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestException('As senhas não coincidem.');
+    }
+  
+    return this.emailService.resetPassword(token, newPassword);
   }
 }
