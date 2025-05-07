@@ -6,9 +6,9 @@ import { CreateEmailDto } from './dto/create-email.dto';
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  // @Post('recover-password')
-  // async recoverPassword(@Body() dto: CreateEmailDto) {
-  //   const result = await this.emailService.recoverPassword(dto);
-  //   return { message: result };
-  // }
+  @Post('recover-password')
+  async recoverPassword(@Body() dto: CreateEmailDto) {
+    const result = await this.emailService.recoverPassword(dto);
+    return { message: result };
+  }
 }

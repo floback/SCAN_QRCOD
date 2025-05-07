@@ -17,15 +17,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3M
 
 ### FIND ALL USER
 GET  http://localhost:3000/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5NjEyMWNkZS0xYWUwLTQzNjMtYjEyNC01ZWQ5ZjUxNWU2NTUiLCJlbWFpbCI6ImNhcmxvcy5taWd1ZWxAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJ1c2VyIiwiaWF0IjoxNzQ2NDY4NDAwLCJleHAiOjE3NDY1NTQ4MDB9.xQ2avRPB95KZZXK8L8EGVxDGd83hPRMrq872DClIs5E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjQ3NDM4OCwiZXhwIjoxNzQ2NTYwNzg4fQ.LRB0WmRzWfCVIADHiZ91Sjg5TzITY9G5LOQobx6r18o
 
 ### UPDATE USER
-PATCH http://localhost:3000/user/8a28c872-7fd9-4a14-b097-9ae700a4a
-Authorization: BearereyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY0NjY1MTIsImV4cCI6MTc0NjU1MjkxMn0.FMhutd4O5X3lF99N_AEJ3AKufjPUBHgkLeQzomHExT8
+PATCH http://localhost:3000/user/8a28c872-7fd9-4a14-b097-9ae700a4afe2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjYzMzIzNywiZXhwIjoxNzQ2NzE5NjM3fQ.BtHrfFGtY-6_7ytZ4c1k2RAUeIXFT7n5Hj_A7cZQ5BU
 Content-Type: application/json
 
 {
-  "email": "loback.filipe@exemplo.com",
+  "email": "filipe.siqueira@novanet-rj.com",
   "name": "filipe siqueira",
   "password": "senha123",
   "status": true,

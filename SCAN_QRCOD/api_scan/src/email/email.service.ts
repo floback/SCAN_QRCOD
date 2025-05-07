@@ -13,24 +13,21 @@ export class EmailService {
 
   ) {}
 
-  // async recoverPassword(dto: CreateEmailDto): Promise<string> {
-  //   const { email, newPassword, confirmPassword } = dto;
+  async recoverPassword(dto: CreateEmailDto): Promise<string> {
+    const { email, newPassword, confirmPassword } = dto;
 
-  //   if (newPassword !== confirmPassword) {
-  //     throw new BadRequestException('As senhas não coincidem');
-  //   }
+    if (newPassword !== confirmPassword) {
+      throw new BadRequestException('As senhas não coincidem');
+    }
 
-  //   const user = await this.usersRepository.findOne({ where: { email } });
+    const user = await this.usersRepository.findOne({ where: { email } });
 
-  //   if (!user) {
-  //     throw new NotFoundException('Usuário não encontrado');
-  //   }
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
 
-  //   const hashedPassword = await bcrypt.hash(newPassword, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  //   // Atualiza a senha na tabela de login
-  //   await this.loginRepository.update({ id_user: user.id }, { password: hashedPassword });
-
-  //   return 'Senha atualizada com sucesso!';
-  // }
+    return 'Senha atualizada com sucesso!';
+  }
 }

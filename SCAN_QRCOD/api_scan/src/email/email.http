@@ -1,0 +1,7 @@
+### REC SENHA
+POST http://localhost:3000/email/recover-password
+Content-Type: application/json
+
+{
+    "email": "filipe."
+}
