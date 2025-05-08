@@ -1,0 +1,9 @@
+### login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "filipe.siqueira@novanet-rj.com.br",
+    "password": "1234"
+
+}

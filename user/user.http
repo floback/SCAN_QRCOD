@@ -1,0 +1,37 @@
+### CREATE USER
+POST http://localhost:3000/user
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTU4NDI2MywiZXhwIjoxNzQ1NjcwNjYzfQ.UnYkDhQrAX-96WhGjLMiFg6VRhefhhQCT6COb9Vtgig
+
+{
+  "email": "carlos.miguel@exemplo.com",
+  "name": "carlos miguel",
+  "password": "senha123",
+  "status": true,
+  "type_user": "user"
+}
+
+### FIND BY ID
+GET http://localhost:3000/user/8824fcd9-4773-448a-8988-596a5bc7fc1a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjQ2ODMxMCwiZXhwIjoxNzQ2NTU0NzEwfQ.hv0s333HhCbemhGMdd0Vkd0VVbnW5_hqFREBxzN-dHY
+
+### FIND ALL USER
+GET  http://localhost:3000/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImxvYmFjay5maWxpcGVAZXhlbXBsby5jb20iLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NjQ3NDM4OCwiZXhwIjoxNzQ2NTYwNzg4fQ.LRB0WmRzWfCVIADHiZ91Sjg5TzITY9G5LOQobx6r18o
+
+### UPDATE USER
+PATCH http://localhost:3000/user/8a28c872-7fd9-4a14-b097-9ae700a4afe2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBub3ZhbmV0LXJqLmNvbS5iciIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNzQ2NjM5NjUyLCJleHAiOjE3NDY3MjYwNTJ9.ImhznG6uIN9DEh25yfszP-K2WCGhjtNhBJ8O1koPgC8
+Content-Type: application/json
+
+{
+  "email": "filipe.siqueira@novanet-rj.com.br",
+  "name": "filipe siqueira",
+  "password": "senha1234",
+  "status": true,
+  "type_user": "admin"
+}
+
+### DELETE USER
+DELETE http://localhost:3000/user/0504936b-a3a8-409c-a56d-56fde4d3ce29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGIzZmE4Yy05ZTg4LTQxZWMtYWQ3OS04ZTgyMzc4MGE0YmQiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBleGVtcGxvLmNvbSIsImlkX3VzZXIiOiIzYmJlMzczNi1jYmUwLTRiMDEtODY4Zi1jOGQ1NjYxMzk3ZWMiLCJ0eXBlX3VzZXIiOiJhZG1pbiIsImlhdCI6MTc0NTg0MDQxMywiZXhwIjoxNzQ1OTI2ODEzfQ.FoX7HdON4T_2U-ZTnlcgtAZjHnLk8ARv2LTCNu4Mq8I

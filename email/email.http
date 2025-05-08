@@ -1,0 +1,19 @@
+### Enviar e-mail de recuperação de senha
+POST http://localhost:3000/email/recovery-password
+Content-Type: application/json
+
+{
+  "email": "filipe.siqueira@novanet-rj.com.br"
+}
+
+### NOVA SENHA
+POST http://localhost:3000/email/reset-password
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YTI4Yzg3Mi03ZmQ5LTRhMTQtYjA5Ny05YWU3MDBhNGFmZTIiLCJlbWFpbCI6ImZpbGlwZS5zaXF1ZWlyYUBub3ZhbmV0LXJqLmNvbS5iciIsInR5cGVfdXNlciI6ImFkbWluIiwiaWF0IjoxNzQ2NzI0OTExLCJleHAiOjE3NDY4MTEzMTF9.k6BPtFP7r9b2QpAVExX0Nlw6kWuaH78rbRyGZfMAEYA
+Content-Type: application/json
+
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoiOGEyOGM4NzItN2ZkOS00YTE0LWIwOTctOWFlNzAwYTRhZmUyIiwiaWF0IjoxNzQ2NzI1MDQ3LCJleHAiOjE3NDY3MjU2NDd9.4ryPFSf2tutCXpUPdOrsSxSRQzvG_idxkYw07oKmMF8",
+  "newPassword": "1234",
+ "confirmPassword": "1234"
+}
+ 
